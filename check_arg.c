@@ -13,6 +13,7 @@
 #include "push_swap.h"
 
 void	use_split(char **argv, t_list **head_a);
+size_t	check_space(char *str);
 long	check_atoi(char *str);
 
 void	check_arg(int ac, char **argv, t_list **head_a)
@@ -23,7 +24,13 @@ void	check_arg(int ac, char **argv, t_list **head_a)
 	if (ac < 2)
 		exit(1);
 	else if (ac == 2)
+	{
+		if (ft_strlen(argv[1]) == 0)
+			error_and_exit("Error:Empty string!\n");
+		if (ft_strlen(argv[1]) == check_space(argv[1]))
+			error_and_exit("Error:There is non-digit character!\n");
 		use_split(argv, head_a);
+	}
 	else
 	{
 		i = 1;
@@ -34,6 +41,19 @@ void	check_arg(int ac, char **argv, t_list **head_a)
 			i++;
 		}
 	}
+}
+
+size_t	check_space(char *str)
+{
+	int	i;
+	int	count;
+	while (str[i])
+	{
+		if (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
+			count++;
+		i++;
+	}
+	return (count);
 }
 
 void	use_split(char **argv, t_list **head_a)

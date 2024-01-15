@@ -47,7 +47,8 @@ void	sort_until_six(t_list **a, t_list **b)
 		}
 		pb(a, b);
 	}
-	sort_three_a(a);
+	if (!is_sorted(*a))
+		sort_three_a(a);
 	while (ft_lstsize(*b) > 0)
 		pa(a, b);
 }
